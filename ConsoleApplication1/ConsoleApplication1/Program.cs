@@ -12,8 +12,9 @@ namespace Test
     {
         static void Main(string[] args)
         {
-			List<string> tags = new List<string>();
+			List<string> tags = new List<string>{"string1","string2"};
 			foreach(var tag in tags){
+				Console.WriteLine("Starting to pull for tag: " + tag + ".");
 				if(tag == "c#"){
 					tag = "c%23";
 				}
@@ -76,6 +77,7 @@ namespace Test
 	                    file.WriteLine(output);
 	                }
 	            }
+				Console.WriteLine("Finishing pulling for tag: " + tag + ".");
 			}
         }
 
