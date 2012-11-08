@@ -12,6 +12,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
+<<<<<<< Updated upstream
 			List<string> tags = new List<string>{"c#",
 				"java",
 				"php",
@@ -62,6 +63,58 @@ namespace Test
 				"linq",
 				"web-services",
 				"visual-studio"};
+=======
+			List<string> tags = new List<string>{"forms",
+			"silverlight",
+			"html5",
+			"actionscript-3",
+			"ipad",
+			"perl",
+			"oracle",
+			"cocoa-touch",
+			"wordpress",
+			"cocoa",
+			"flash",
+			"spring",
+			"sql-server-2008",
+			"git",
+			"query",
+			"apache",
+			"swing",
+			"hibernate",
+			"flex",
+			"r",
+			"entity-framework",
+			"excel",
+			"security",
+			"delphi",
+			"jquery-ui",
+			"api",
+			"file",
+			"tsql",
+			"sqlite",
+			"bash",
+			"qt",
+			"oop",
+			"internet-explorer",
+			"unit-testing",
+			"debugging",
+			"google-app-engine",
+			".htaccess",
+			"list",
+			"sql-server-2005",
+			"class",
+			"validation",
+			"node.js",
+			"mvc",
+			"windows-phone-7",
+			"codeigniter",
+			"http",
+			"svn",
+			"parsing",
+			"winapi",
+			"homework"};
+>>>>>>> Stashed changes
 			for(int k = 0; k < tags.Count; k++){
 				string tag = tags[k];
 				Console.WriteLine("Starting to pull for tag: " + tag + ".");
