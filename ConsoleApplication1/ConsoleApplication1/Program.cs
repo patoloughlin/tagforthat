@@ -12,62 +12,71 @@ namespace Test
     {
         static void Main(string[] args)
         {
-			List<Responce> responces = new List<Responce>();
-            int i = 1;
-            bool keepRunning = true;
-            while (keepRunning)
-            {
-                string url = "http://api.stackoverflow.com/1.1/questions?body=true&pagesize=100&tagged=c%23&page=" + i.ToString();
+			List<string> tags = new List<string>();
+			foreach(var tag in tags){
+				if(tag == "c#"){
+					tag = "c%23";
+				}
+				//Full loop for current tag
+				List<Responce> responces = new List<Responce>();
+	            int i = 1;
+	            bool keepRunning = true;
+	            while (keepRunning)
+	            {
+	                string url = "http://api.stackoverflow.com/1.1/questions?body=true&pagesize=100&tagged=" + tag + "&page=" + i.ToString();
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.Timeout = 5000;
+	                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+	                request.Timeout = 5000;
 
-                try
-                {
-                    using (WebResponse response = (HttpWebResponse)request.GetResponse())
-                    using (Stream csStream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress))
-                    {
-                        byte[] bytes = ReadFully(csStream);
-                        string responceString = Encoding.UTF8.GetString(bytes);
-                        try
-                        {
-                            Responce responceObject = JsonConvert.DeserializeObject<Responce>(responceString);
-                            responces.Add(responceObject);
-                            if (responceObject.page > 10)
-                            {
-                                keepRunning = false;
-                            }
-                        }
-                        catch{
-                        }
-                    }
+	                try
+	                {
+	                    using (WebResponse response = (HttpWebResponse)request.GetResponse())
+	                    using (Stream csStream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress))
+	                    {
+	                        byte[] bytes = ReadFully(csStream);
+	                        string responceString = Encoding.UTF8.GetString(bytes);
+	                        try
+	                        {
+	                            Responce responceObject = JsonConvert.DeserializeObject<Responce>(responceString);
+	                            responces.Add(responceObject);
+	                            if (responceObject.total < responceObject.page * responceObject.pagesize || responceObject.page > 10)
+	                            {
+	                                keepRunning = false;
+	                            }
+	                        }
+	                        catch{
+	                        }
+	                    }
 
 
-                }
-                catch (WebException)
-                {
-                    Console.WriteLine("Error Occured");
-                }
-                i++;
-            }
-            if(responces.Count > 0){
-                SaveFile saveData = new SaveFile();
-                saveData.questions = new List<Question>();
-                saveData.count = responces[0].total;
-                saveData.tag = "c#";
-                foreach (var responce in responces)
-                {
-                    foreach (var question in responce.questions)
-                    {
-                        saveData.questions.Add(question);
-                    }
-                }
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter("csharp.json"))
-                {
-                    string output = JsonConvert.SerializeObject(saveData);
-                    file.WriteLine(output);
-                }
-            }
+	                }
+	                catch (WebException)
+	                {
+	                    Console.WriteLine("Error Occured");
+	                }
+	                i++;
+	            }
+				if(tag == "c%23")
+					tag = "c#";
+	            if(responces.Count > 0){
+	                SaveFile saveData = new SaveFile();
+	                saveData.questions = new List<Question>();
+	                saveData.count = responces[0].total;
+	                saveData.tag = tag;
+	                foreach (var responce in responces)
+	                {
+	                    foreach (var question in responce.questions)
+	                    {
+	                        saveData.questions.Add(question);
+	                    }
+	                }
+	                using (System.IO.StreamWriter file = new System.IO.StreamWriter((tag + ".json")))
+	                {
+	                    string output = JsonConvert.SerializeObject(saveData);
+	                    file.WriteLine(output);
+	                }
+	            }
+			}
         }
 
         public static byte[] ReadFully(Stream input)
