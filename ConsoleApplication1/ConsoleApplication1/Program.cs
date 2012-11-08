@@ -67,7 +67,7 @@ namespace Test
 	                saveData.questions = new List<Question>();
 	                saveData.count = responces[0].total;
 	                saveData.tag = tag;
-					using (System.IO.StreamWriter file = new System.IO.StreamWriter((tag + ".json"),true))
+					using (System.IO.StreamWriter file = new System.IO.StreamWriter((@"../../../../JsonFiles/" + tag + ".json"),true))
 					{
 		                foreach (var responce in responces)
 		                {
