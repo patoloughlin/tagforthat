@@ -12,8 +12,9 @@ namespace Test
     {
         static void Main(string[] args)
         {
-			List<string> tags = new List<string>{"string1","string2"};
-			foreach(var tag in tags){
+			List<string> tags = new List<string>{};
+			for(int k = 0; k < tags.Count; k++){
+				string tag = tags[k];
 				Console.WriteLine("Starting to pull for tag: " + tag + ".");
 				if(tag == "c#"){
 					tag = "c%23";
