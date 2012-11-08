@@ -12,109 +12,9 @@ namespace Test
     {
         static void Main(string[] args)
         {
-<<<<<<< Updated upstream
-			List<string> tags = new List<string>{"c#",
-				"java",
-				"php",
-				"javascript",
-				"android",
-				"jquery",
-				"c++",
-				"iphone",
-				"asp.net",
-				"python",
-				".net",
-				"html",
-				"mysql",
-				"objective-c",
-				"ios",
-				"sql",
-				"css",
-				"ruby-on-rails",
-				"c",
-				"ruby",
-				"sql-server",
-				"wpf",
-				"xml",
-				"ajax",
-				"regex",
-				"asp.net-mvc",
-				"database",
-				"xcode",
-				"django",
-				"linux",
-				"windows",
-				"arrays",
-				"vb.net",
-				"facebook",
-				"ruby-on-rails-3",
-				"eclipse",
-				"json",
-				"winforms",
-				"string",
-				"multithreading",
-				"asp.net-mvc-3",
-				"visual-studio-2010",
-				"wcf",
-				"performance",
-				"image",
-				"osx",
-				"algorithm",
-				"linq",
-				"web-services",
-				"visual-studio"};
-=======
-			List<string> tags = new List<string>{"forms",
-			"silverlight",
-			"html5",
-			"actionscript-3",
-			"ipad",
-			"perl",
-			"oracle",
-			"cocoa-touch",
-			"wordpress",
-			"cocoa",
-			"flash",
-			"spring",
-			"sql-server-2008",
-			"git",
-			"query",
-			"apache",
-			"swing",
-			"hibernate",
-			"flex",
-			"r",
-			"entity-framework",
-			"excel",
-			"security",
-			"delphi",
-			"jquery-ui",
-			"api",
-			"file",
-			"tsql",
-			"sqlite",
-			"bash",
-			"qt",
-			"oop",
-			"internet-explorer",
-			"unit-testing",
-			"debugging",
-			"google-app-engine",
-			".htaccess",
-			"list",
-			"sql-server-2005",
-			"class",
-			"validation",
-			"node.js",
-			"mvc",
-			"windows-phone-7",
-			"codeigniter",
-			"http",
-			"svn",
-			"parsing",
-			"winapi",
-			"homework"};
->>>>>>> Stashed changes
+			List<string> tags = new List<string>{};
+			int startPage = 1;
+			int endPage = 10;
 			for(int k = 0; k < tags.Count; k++){
 				string tag = tags[k];
 				Console.WriteLine("Starting to pull for tag: " + tag + ".");
@@ -123,7 +23,7 @@ namespace Test
 				}
 				//Full loop for current tag
 				List<Responce> responces = new List<Responce>();
-	            int i = 1;
+				int i = startPage;
 	            bool keepRunning = true;
 	            while (keepRunning)
 	            {
@@ -143,7 +43,7 @@ namespace Test
 	                        {
 	                            Responce responceObject = JsonConvert.DeserializeObject<Responce>(responceString);
 	                            responces.Add(responceObject);
-	                            if (responceObject.total < responceObject.page * responceObject.pagesize || responceObject.page > 10)
+								if (responceObject.total < responceObject.page * responceObject.pagesize || responceObject.page >= endPage)
 	                            {
 	                                keepRunning = false;
 	                            }
@@ -167,18 +67,14 @@ namespace Test
 	                saveData.questions = new List<Question>();
 	                saveData.count = responces[0].total;
 	                saveData.tag = tag;
-	                foreach (var responce in responces)
-	                {
-	                    foreach (var question in responce.questions)
-	                    {
-	                        saveData.questions.Add(question);
-	                    }
-	                }
-	                using (System.IO.StreamWriter file = new System.IO.StreamWriter((tag + ".json")))
-	                {
-	                    string output = JsonConvert.SerializeObject(saveData);
-	                    file.WriteLine(output);
-	                }
+					using (System.IO.StreamWriter file = new System.IO.StreamWriter((tag + ".json"),true))
+					{
+		                foreach (var responce in responces)
+		                {
+							string output = JsonConvert.SerializeObject(responce);
+							file.WriteLine(output);
+		                }
+					}
 	            }
 				Console.WriteLine("Finishing pulling for tag: " + tag + ".");
 			}
