@@ -1,12 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TheresATagForThat\MainWindow.cs">
-    <Files>
-      <File FileName="TheresATagForThat\Main.cs" Line="9" Column="4" />
-      <File FileName="TheresATagForThat\MainWindow.cs" Line="25" Column="32" />
-      <File FileName="TheresATagForThat\Models\TestObject.cs" Line="8" Column="34" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

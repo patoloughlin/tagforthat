@@ -12,7 +12,6 @@ namespace Test
     {
         static void Main(string[] args)
         {
-			Console.WriteLine("DA FUCK!");
 			List<Responce> responces = new List<Responce>();
             int i = 1;
             bool keepRunning = true;
@@ -69,7 +68,6 @@ namespace Test
                     file.WriteLine(output);
                 }
             }
-			Console.WriteLine("Finished this shit!");
         }
 
         public static byte[] ReadFully(Stream input)
