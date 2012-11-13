@@ -7,6 +7,10 @@ public partial class MainWindow
 	private global::Gtk.Button ClickButton;
 	private global::Gtk.Label label1;
 	private global::Gtk.Entry entry1;
+	private global::Gtk.Entry Port;
+	private global::Gtk.Entry IpAddress;
+	private global::Gtk.Label label2;
+	private global::Gtk.Label label3;
 	
 	protected virtual void Build ()
 	{
@@ -47,6 +51,44 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w3 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.entry1]));
 		w3.X = 21;
 		w3.Y = 54;
+		// Container child fixed2.Gtk.Fixed+FixedChild
+		this.Port = new global::Gtk.Entry ();
+		this.Port.CanFocus = true;
+		this.Port.Name = "Port";
+		this.Port.Text = global::Mono.Unix.Catalog.GetString ("8080");
+		this.Port.IsEditable = true;
+		this.Port.InvisibleChar = '●';
+		this.fixed2.Add (this.Port);
+		global::Gtk.Fixed.FixedChild w4 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.Port]));
+		w4.X = 520;
+		w4.Y = 341;
+		// Container child fixed2.Gtk.Fixed+FixedChild
+		this.IpAddress = new global::Gtk.Entry ();
+		this.IpAddress.CanFocus = true;
+		this.IpAddress.Name = "IpAddress";
+		this.IpAddress.Text = global::Mono.Unix.Catalog.GetString ("127.0.0.1");
+		this.IpAddress.IsEditable = true;
+		this.IpAddress.InvisibleChar = '●';
+		this.fixed2.Add (this.IpAddress);
+		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.IpAddress]));
+		w5.X = 520;
+		w5.Y = 316;
+		// Container child fixed2.Gtk.Fixed+FixedChild
+		this.label2 = new global::Gtk.Label ();
+		this.label2.Name = "label2";
+		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Ip Address");
+		this.fixed2.Add (this.label2);
+		global::Gtk.Fixed.FixedChild w6 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label2]));
+		w6.X = 460;
+		w6.Y = 317;
+		// Container child fixed2.Gtk.Fixed+FixedChild
+		this.label3 = new global::Gtk.Label ();
+		this.label3.Name = "label3";
+		this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("Port #");
+		this.fixed2.Add (this.label3);
+		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label3]));
+		w7.X = 475;
+		w7.Y = 340;
 		this.Add (this.fixed2);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();

@@ -53,6 +53,52 @@
             <property name="Y">54</property>
           </packing>
         </child>
+        <child>
+          <widget class="Gtk.Entry" id="Port">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Text" translatable="yes">8080</property>
+            <property name="IsEditable">True</property>
+            <property name="InvisibleChar">●</property>
+          </widget>
+          <packing>
+            <property name="X">520</property>
+            <property name="Y">341</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Entry" id="IpAddress">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Text" translatable="yes">127.0.0.1</property>
+            <property name="IsEditable">True</property>
+            <property name="InvisibleChar">●</property>
+          </widget>
+          <packing>
+            <property name="X">520</property>
+            <property name="Y">316</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Label" id="label2">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Ip Address</property>
+          </widget>
+          <packing>
+            <property name="X">460</property>
+            <property name="Y">317</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Label" id="label3">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Port #</property>
+          </widget>
+          <packing>
+            <property name="X">475</property>
+            <property name="Y">340</property>
+          </packing>
+        </child>
       </widget>
     </child>
   </widget>

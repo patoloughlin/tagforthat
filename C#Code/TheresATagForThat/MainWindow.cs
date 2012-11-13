@@ -5,6 +5,7 @@ using TheresATagForThat;
 using System.IO;
 using System.Net.Sockets;
 using System.Net;
+using System.Text;
 
 public partial class MainWindow: Gtk.Window
 {	
@@ -24,14 +25,54 @@ public partial class MainWindow: Gtk.Window
 		TestObject temp = new TestObject();
 		temp.number = 1;
 		temp.Name = this.entry1.Text;
-		this.label1.Text = JsonConvert.SerializeObject(temp).ToString();
+		this.label1.Text = sendRequest(JsonConvert.SerializeObject(temp).ToString());
 
-		var jsonVar = new WebClient().DownloadString("http://api.stackoverflow.com/1.1/questions?body=true&pagesize=100&tagged=c%23&page=1");
-
-		Print jsonVar;
-
-		string jsonStr = JsonConvert.SerializeObject(jsonVar, Formatting.Indented);
-		File.WriteAllText(@"test.json", jsonStr);
-
+	}
+	private string sendRequest(string request)
+	{
+		try
+		{
+			//Set up connection to python server
+			TcpClient client = new TcpClient();
+			IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse(this.IpAddress.Text), this.Port.Text);
+			client.Connect(serverEndPoint);
+			NetworkStream clientStream = client.GetStream();
+			//Encode request to send to python
+			ASCIIEncoding encoder = new ASCIIEncoding();
+			byte[] buffer = encoder.GetBytes(request);
+			byte[] bufferInfo = encoder.GetBytes(request.Length.ToString());
+			//Send length of request string
+			clientStream.Write(bufferInfo, 0, bufferInfo.Length);
+			clientStream.Flush();
+			//Recieve send command from python
+			byte[] readin = new byte[256];
+			clientStream.Read(readin, 0, 256);
+			clientStream.Flush();
+			//Send request to server
+			clientStream.Write(buffer, 0, buffer.Length);
+			clientStream.Flush();
+			//Recieve send command from python
+			readin = new byte[256];
+			clientStream.Read(readin, 0, 256);
+			clientStream.Flush();
+			string readinString = System.Text.Encoding.Default.GetString(readin).Replace("\0", "");
+			int responceSize = Convert.ToInt32(readinString);
+			//Send request for send
+			buffer = encoder.GetBytes("send");
+			clientStream.Write(buffer, 0, buffer.Length);
+			clientStream.Flush();
+			//Recieve server responce
+			//Recieve send command from python
+			readin = new byte[responceSize];
+			clientStream.Read(readin, 0, responceSize);
+			clientStream.Flush();
+			client.Close();
+			readinString = System.Text.Encoding.Default.GetString(readin).Replace("\0", "");
+			return readinString;
+		}
+		catch
+		{
+			return "Failed";
+		}
 	}
 }
