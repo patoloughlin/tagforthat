@@ -152,3 +152,20 @@ class TfIdf:
       tfidf[word] = mytf * myidf
 
     return sorted(tfidf.items(), key=itemgetter(1), reverse=True)
+	
+  def get_doc_keywords_dict(self, curr_doc):
+    """Retrieve terms and corresponding tf-idf for the specified document.
+
+       The returned terms are ordered by decreasing tf-idf.
+    """
+    tfidf = {}
+    tokens = self.get_tokens(curr_doc)
+    tokens_set = set(tokens)
+    for word in tokens_set:
+      # The definition of TF specifies the denominator as the count of terms
+      # within the document, but for short documents, I've found heuristically
+      # that sometimes len(tokens_set) yields more intuitive results.
+      mytf = float(tokens.count(word)) / len(tokens)
+      myidf = self.get_idf(word)
+      tfidf[word] = mytf * myidf
+    return tfidf
