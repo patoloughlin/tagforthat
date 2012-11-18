@@ -3,34 +3,32 @@
 import time
 import utils
 import operator
+import re
+from stemming import porter2
+from pymongo import ASCENDING, DESCENDING
+from math import log
 
-"""
-def process_tweets(method,label):
-    print 'starting %s'%label
-    tweets = utils.read_tweets()
-    start_time = time.time()
-    method(tweets)
-    end_time = time.time()
-    print 'done with %s after %.3f seconds'%(label,end_time-start_time)
-"""
 
-def main():
+def tokenize(text):
+    tokens = re.findall("[\w']+", text.lower())
+    return [porter2.stem(token) for token in tokens]
+
+# items is the corpus
+def index(items):
     db = utils.connect_db('stack', remove_existing=True)
-
-    items = utils.read_items()
+    
 
     counter = {}
     numtags = 0
     numquestions = 0
 
-    for item in items:
-        for question in item["questions"]:
-            numquestions += 1
-            for tag in question["tags"]:
-                if not counter.has_key(tag):
-                    counter[tag] = 0
-                counter[tag] += 1
-                numtags += 1
+    for question in items:
+        numquestions += 1
+        for tag in question["tags"]:
+            if not counter.has_key(tag):
+                counter[tag] = 0
+            counter[tag] += 1
+            numtags += 1
 
     tagfreqList = sorted(counter.iteritems(), key=operator.itemgetter(1),reverse=True)
 
@@ -47,4 +45,6 @@ def main():
     print "average tags per question:" + str(float(numtags)/float(numquestions))
 
 if __name__=="__main__":
-    main()
+    items = utils.read_items()
+    index(items)
+
