@@ -34,11 +34,11 @@ class TestCoreAlg(unittest.TestCase):
 		print "this is the setup method"
 
     def test_classifier_for_cats(self):
-        self.classifier.runPNAClassifier(3,1,5,"I hate pointers")
+        self.classifier.runPNAClassifier(3,1,"I hate pointers")
 
     def test_fail_printout(self):
-		self.classifier.runPNAClassifier(5,1,5,"I hate pointers")
-		self.classifier.runPNAClassifier(3,1,5,"there are cats in my computer")
+		self.classifier.runPNAClassifier(5,1,"I hate pointers")
+		self.classifier.runPNAClassifier(3,1,"there are cats in my computer")
 
 if __name__ == '__main__':
     unittest.main()
