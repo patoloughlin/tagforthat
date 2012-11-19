@@ -3,6 +3,7 @@
 import unittest
 import sys,os
 import index
+import classifier
 
 path = os.path.abspath(__file__)
 sys.path.append(os.path.join(os.path.dirname(path), "../"))
@@ -27,10 +28,14 @@ corpus = [
 
 class TestCoreAlg(unittest.TestCase):
     def setUp(self):
-        print "this is the setup method"
+		self.index = index.Indexer()
+		self.index.index(corpus)
+		self.classifier = classifier.PNAClassifier(self.index.tagInfo)
+		print "this is the setup method"
 
     def test_calculate_tfidf(self):
-        index.index(corpus)
+		self.classifier.runPNAClassifier(5,1,5,"I hate pointers")
+		self.assertEqual(1,0)
 
     # Add more tests here.
 
