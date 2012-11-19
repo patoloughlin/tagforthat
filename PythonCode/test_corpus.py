@@ -33,8 +33,12 @@ class TestCoreAlg(unittest.TestCase):
 		self.classifier = classifier.PNAClassifier(self.index.tagInfo)
 		print "this is the setup method"
 
-    def test_calculate_tfidf(self):
+    def test_classifier_for_cats(self):
+        self.classifier.runPNAClassifier(3,1,5,"I hate pointers")
+
+    def test_fail_printout(self):
 		self.classifier.runPNAClassifier(5,1,5,"I hate pointers")
+		self.classifier.runPNAClassifier(3,1,5,"there are cats in my computer")
 		self.assertEqual(1,0)
 
     # Add more tests here.
