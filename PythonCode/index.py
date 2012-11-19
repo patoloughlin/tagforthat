@@ -10,7 +10,7 @@ from math import log
 from collections import Counter
 import tfidf
 
-
+"""
 def checkpoint1(items):
     for question in items:
         numquestions += 1
@@ -38,59 +38,61 @@ def checkpoint1(items):
 def tokenize(text):
     tokens = re.findall("[\w']+", text.lower())
     return [porter2.stem(token) for token in tokens]
+"""
+class Indexer(object):
+    def __init__(self):
+        self.tfidfOb = tfidf.TfIdf()
+        selftagInfo = {}
 
 # items is the corpus
-def index(items):
-    db = utils.connect_db('stack', remove_existing=True)
-    tfidfOb = tfidf.TfIdf()
-    
-    tagInfo = {}
+    def index(items):
+        db = utils.connect_db('stack', remove_existing=True)
 
-    for question in items:
-        wordSet = set()
-        tfidfOb.add_input_document(question["body"])
+        for question in items:
+            wordSet = set()
+            tfidfOb.add_input_document(question["body"])
 
 #        for token in tokens:
 #            wordSet.add(token)
 
-        for tag in question["tags"]:
-            if not tagInfo.has_key(tag):
-                tagInfo[tag] = {}
-                tagInfo[tag]["tokens"] = {}
-                tagInfo[tag]["count"] = 0
-            tagInfo[tag]["count"] += 1
+            for tag in question["tags"]:
+                if not tagInfo.has_key(tag):
+                    tagInfo[tag] = {}
+                    tagInfo[tag]["tokens"] = {}
+                    tagInfo[tag]["count"] = 0
+                tagInfo[tag]["count"] += 1
 
-    for question in items:   # may need to watch out for reused generators!!!
-        for tag in question["tags"]:
-            tfidfDict = tfidfOb.get_doc_keywords_dict(question["body"])
-            for term in tfidfDict:
-                if not tagInfo[tag]["tokens"].has_key(term):
-                    tagInfo[tag]["tokens"][term] = 0
-                tagInfo[tag]["tokens"][term] += tfidfDict[term]
+        for question in items:   # may need to watch out for reused generators!!!
+            for tag in question["tags"]:
+                tfidfDict = tfidfOb.get_doc_keywords_dict(question["body"])
+                for term in tfidfDict:
+                    if not tagInfo[tag]["tokens"].has_key(term):
+                        tagInfo[tag]["tokens"][term] = 0
+                    tagInfo[tag]["tokens"][term] += tfidfDict[term]
 
-    for tag in tagInfo:
-        for term in tagInfo[tag]["tokens"]:
-            newAvg = float(tagInfo[tag]["tokens"][term])/float(tagInfo[tag]["count"])
-            tagInfo[tag]["tokens"][term] = newAvg
+        for tag in tagInfo:
+            for term in tagInfo[tag]["tokens"]:
+                newAvg = float(tagInfo[tag]["tokens"][term])/float(tagInfo[tag]["count"])
+                tagInfo[tag]["tokens"][term] = newAvg
 
-    for item in tagInfo:
-        print "tag: " + str(item)
-        for thing in tagInfo[item]:
-            print thing
-            print tagInfo[item][thing]
-            print "   ====    "
-        print "--------"
+        for item in tagInfo:
+            print "tag: " + str(item)
+            for thing in tagInfo[item]:
+                print thing
+                print tagInfo[item][thing]
+                print "   ====    "
+            print "--------"
 
-    tfidfOb.save_corpus_to_file("tfidfValues.txt","stopwords.txt")
+        tfidfOb.save_corpus_to_file("tfidfValues.txt","stopwords.txt")
 #    counter_real = Counter(biglist)
-    #print counter_real
+        #print counter_real
 #    for token in wordSet:
 #        print tfidfOb.get_doc_keywords_dict(token)
 
 #    X = {tag = "c++", tokens={"i":3,"am":4} }
 
-
+"""
 if __name__=="__main__":
     items = utils.read_items()
     index(items)
-
+"""
