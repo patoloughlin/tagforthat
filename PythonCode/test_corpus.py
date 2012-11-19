@@ -34,7 +34,7 @@ class TestCoreAlg(unittest.TestCase):
 		print "this is the setup method"
 
     def test_calculate_tfidf(self):
-		self.classifier.runPNAClassifier(4,2,5,"my cat broke my windows pc")
+		self.classifier.runPNAClassifier(4,2,"my cat broke my windows pc")
 		self.assertEqual(1,0)
 
     # Add more tests here.

@@ -31,7 +31,7 @@ class PNAClassifier(object):
 		self.tfidf = tfidf.TfIdf('tfidfValues.txt')
 		pass
 		
-	def runPNAClassifier(self, outerLimit, innerLimit, k, query):
+	def runPNAClassifier(self, outerLimit, innerLimit, query):
 		tagDistances = {}
 		topTags = []
 		#Calculate tf-idf vector of query based off of idf vector in database
@@ -42,7 +42,6 @@ class PNAClassifier(object):
 			#Save distance into tagDistance array
 			tagDistances[centroid['tag']] = {'tag':centroid['tag'],'distance':calculateDistance(centroid,queryDict)}
 		topTags = sorted(tagDistances, key= lambda X : tagDistances[X]['distance'])[:outerLimit]
-		print topTags
 		#Loop throught the top tags(outerLimit is the cut off for this)
 		#We will now get the knn neighbors of all the questions inside of the outerLimit
 		loadedQuestions = []
@@ -66,13 +65,12 @@ class PNAClassifier(object):
 						questionDistances[tag]['distance'] = distance
 						questionDistances[tag]['tag'] = tag
 		topTags = sorted(questionDistances, key= lambda X : questionDistances[X]['distance'])[:innerLimit]
-		print topTags
-		return 0
+		return topTags
 		
 def main():
 	centroids = [{'tag':'c#','tokens':{'c#':1.3862943611198906}},{'tag':'java','tokens':{'java':.2}}]
 	classifier = PNAClassifier(centroids)
-	classifier.runPNAClassifier(4,2,5,"linux is broken")
+	classifier.runPNAClassifier(4,2,"linux is broken")
 	return 0
 if __name__=="__main__":
     main()
