@@ -37,8 +37,9 @@ class TestCoreAlg(unittest.TestCase):
         self.classifier.runPNAClassifier(3,1,"I hate pointers")
 
     def test_fail_printout(self):
-		self.classifier.runPNAClassifier(5,1,"I hate pointers")
-		self.classifier.runPNAClassifier(3,1,"there are cats in my computer")
+        print self.classifier.runPNAClassifier(5,3,"I hate pointers")
+        print self.classifier.runPNAClassifier(3,2,"there are cats in my computer")
+        self.assertEqual(1,0)
 
 if __name__ == '__main__':
     unittest.main()

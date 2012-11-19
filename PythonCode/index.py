@@ -9,14 +9,36 @@ from pymongo import ASCENDING, DESCENDING
 from math import log
 from collections import Counter
 import tfidf
-from nltk.corpus import stopwords
+
+"""
+def checkpoint1(items):
+    for question in items:
+        numquestions += 1
+        for tag in question["tags"]:
+            if not counter.has_key(tag):
+                counter[tag] = 0
+            counter[tag] += 1
+            numtags += 1
+
+    tagfreqList = sorted(counter.iteritems(), key=operator.itemgetter(1),reverse=True)
+
+    for tag in tagfreqList[:500]:
+#        print str(tag)
+        with open("tags.txt", "a") as myfile:
+            myfile.write(tag[0] + "\n")
+        with open("nums.txt", "a") as mynumsfile:
+            mynumsfile.write(str(tag[1]) + "\n")
+
+    print "total unique tags:" + str(len(tagfreqList))
+    print "total number of tags:" + str(numtags)
+    print "total number of questions:" + str(numquestions)
+    print "average tags per question:" + str(float(numtags)/float(numquestions))
 
 
 def tokenize(text):
-    #tokens = re.findall("[\w']+", text.lower())
-    tokens = text.split()
+    tokens = re.findall("[\w']+", text.lower())
     return [porter2.stem(token) for token in tokens]
-
+"""
 class Indexer(object):
     def __init__(self):
         self.tfidfOb = tfidf.TfIdf()
@@ -26,16 +48,9 @@ class Indexer(object):
     def index(self,items):
         db = utils.connect_db('stack', remove_existing=True)
 
-        filteredQuestion = {}
-
         for question in items:
             wordSet = set()
-            filtered_words = [w for w in tokenize(question["body"]) if not w in stopwords.words('english')]
-            paragraph = ""
-            for myword in filtered_words:
-                paragraph += myword + " "
-            filteredQuestion[question["question_id"]] = paragraph
-            self.tfidfOb.add_input_document(paragraph)
+            self.tfidfOb.add_input_document(question["body"])
 
 #        for token in tokens:
 #            wordSet.add(token)
@@ -49,7 +64,7 @@ class Indexer(object):
 
         for question in items:   # may need to watch out for reused generators!!!
             for tag in question["tags"]:
-                tfidfDict = self.tfidfOb.get_doc_keywords_dict(filteredQuestion[question["question_id"]])
+                tfidfDict = self.tfidfOb.get_doc_keywords_dict(question["body"])
                 for term in tfidfDict:
                     if not self.tagInfo[tag]["tokens"].has_key(term):
                         self.tagInfo[tag]["tokens"][term] = 0
