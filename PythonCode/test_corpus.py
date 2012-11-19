@@ -28,18 +28,21 @@ corpus = [
 
 class TestCoreAlg(unittest.TestCase):
     def setUp(self):
-		self.index = index.Indexer()
-		self.index.index(corpus)
-		self.classifier = classifier.PNAClassifier(self.index.tagInfo,corpus)
-		print "this is the setup method"
+        self.index = index.Indexer()
+        self.index.index(corpus)
+        self.classifier = classifier.PNAClassifier(self.index.tagInfo,corpus)
 
+    def test_classifier_for_pointers(self):
+        tags = self.classifier.runPNAClassifier(4,2,"I hate pointers")
+        self.assertEqual(True,'pointer' in tags)
+    
     def test_classifier_for_cats(self):
-        self.classifier.runPNAClassifier(3,1,"I hate pointers")
-
-    def test_fail_printout(self):
-        print self.classifier.runPNAClassifier(5,3,"I hate pointers")
-        print self.classifier.runPNAClassifier(3,2,"there are cats in my computer")
-        self.assertEqual(1,0)
+        tags = self.classifier.runPNAClassifier(4,2,"My cat ran accross my keyboard!")
+        self.assertEqual(True,'cats' in tags)
+        
+    def test_classifier_for_windows(self):
+        tags = self.classifier.runPNAClassifier(4,2,"I got a blue screen of death!")
+        self.assertEqual(True,'Windows' in tags)
 
 if __name__ == '__main__':
     unittest.main()
