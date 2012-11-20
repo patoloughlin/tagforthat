@@ -37,22 +37,22 @@ class PNAClassifier(object):
         queryDict = {}
         queryDict['tokens'] = self.tfidf.get_doc_keywords_dict(query)
         for centroid in self.centroids:
-			#Calculate distance of query to centroid
-			#Save distance into tagDistance array
+            #Calculate distance of query to centroid
+            #Save distance into tagDistance array
             tagDistances[centroid['tag']] = {'tag':centroid['tag'],'distance':calculateDistance(centroid,queryDict)}
         topTags = sorted(tagDistances, key= lambda X : tagDistances[X]['distance'])[:outerLimit]
         print topTags
         #Loop throught the top tags(outerLimit is the cut off for this)
-		#We will now get the knn neighbors of all the questions inside of the outerLimit
+        #We will now get the knn neighbors of all the questions inside of the outerLimit
         loadedQuestions = []
         questionDistances = {}
         for tag in topTags:
             for question in self.corpus:
-				if tag in question['tags']:
-					questionDict = {}
-					questionDict['tokens'] = self.tfidf.get_doc_keywords_dict(question['body'])
-					questionDict['tags'] = question['tags']
-					loadedQuestions.append(questionDict)
+                if tag in question['tags']:
+                    questionDict = {}
+                    questionDict['tokens'] = self.tfidf.get_doc_keywords_dict(question['body'])
+                    questionDict['tags'] = question['tags']
+                    loadedQuestions.append(questionDict)
         for question in loadedQuestions:
             distance = calculateDistance(question,queryDict)
             for tag in question['tags']:
@@ -72,9 +72,9 @@ class PNAClassifier(object):
         return topTags
     
 def main():
-	centroids = [{'tag':'c#','tokens':{'c#':1.3862943611198906}},{'tag':'java','tokens':{'java':.2}}]
-	classifier = PNAClassifier(centroids)
-	classifier.runPNAClassifier(4,2,"linux is broken")
-	return 0
+    centroids = [{'tag':'c#','tokens':{'c#':1.3862943611198906}},{'tag':'java','tokens':{'java':.2}}]
+    classifier = PNAClassifier(centroids)
+    classifier.runPNAClassifier(4,2,"linux is broken")
+    return 0
 if __name__=="__main__":
     main()
