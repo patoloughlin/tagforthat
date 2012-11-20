@@ -42,7 +42,7 @@ class TestCoreAlg(unittest.TestCase):
         
     def test_classifier_for_windows(self):
         tags = self.classifier.runPNAClassifier(4,2,"I got a blue screen of death!")
-        self.assertEqual(True,'Windows' in tags)
+        self.assertEqual(True,'bluescreen' in tags)
 
 if __name__ == '__main__':
     unittest.main()
