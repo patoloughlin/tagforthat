@@ -40,13 +40,14 @@ def tokenize(text):
     return [porter2.stem(token) for token in tokens]
 """
 class Indexer(object):
-    def __init__(self):
+    def __init__(self, db):
         self.tfidfOb = tfidf.TfIdf()
         self.tagInfo = {}
+        self.mongo = db
 
 # items is the corpus
     def index(self,items):
-        db = utils.connect_db('stack', remove_existing=True)
+        self.mongo = utils.connect_db('stack', remove_existing=True)
 
         for question in items:
             wordSet = set()
@@ -90,8 +91,9 @@ class Indexer(object):
 
 #    X = {tag = "c++", tokens={"i":3,"am":4} }
 
-"""
+
 if __name__=="__main__":
     items = utils.read_items()
-    index(items)
-"""
+    indexMe = Indexer(None)
+    indexMe.index(items)
+    

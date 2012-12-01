@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+for var in "$@" 
+do
+    cat $var | sed 's|<[^>]*>||g' > cleaned/$var
+done
+
+
