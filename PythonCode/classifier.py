@@ -41,7 +41,7 @@ class PNAClassifier(object):
             #Save distance into tagDistance array
             tagDistances[centroid['tag']] = {'tag':centroid['tag'],'distance':calculateDistance(centroid,queryDict)}
         topTags = sorted(tagDistances, key= lambda X : tagDistances[X]['distance'])[:outerLimit]
-        print topTags
+        print "initial:" + str(topTags)
         #Loop throught the top tags(outerLimit is the cut off for this)
         #We will now get the knn neighbors of all the questions inside of the outerLimit
         loadedQuestions = []

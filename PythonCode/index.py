@@ -23,6 +23,7 @@ class Indexer(object):
         self.tagInfo = {}
         self.centroids = db['centroids']
         self.mongo = db
+        self.questions = db['data']
 
 # items is the corpus
     def index(self,items):
@@ -32,6 +33,7 @@ class Indexer(object):
         for question in iterators[0]:
             wordSet = set()
             self.tfidfOb.add_input_document(question["body"])
+            self.questions.insert(question)
 
 #        for token in tokens:
 #            wordSet.add(token)
@@ -66,6 +68,7 @@ class Indexer(object):
             self.centroids.insert({'tag':tag,'tokens':self.tagInfo[tag]['tokens']})
 
         self.centroids.create_index([('tag',ASCENDING)])
+        self.questions.create_index([('question_id',ASCENDING)])
         #self.tagInfo = tagInfoStructure
         
 

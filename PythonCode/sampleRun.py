@@ -25,10 +25,13 @@ if __name__=="__main__":
 
     tags_ = myIndexer.centroids.find()
     tags = tags_.sort('tag',DESCENDING)
-
     finalList = [doc for doc in tags]
 
-    classy = classifier.PNAClassifier(finalList,tags)
+    q_ = myIndexer.questions.find()
+    questions = q_.sort('question_id',DESCENDING)
+    finalQuestions = [doc for doc in questions]
+
+    classy = classifier.PNAClassifier(finalList,finalQuestions)
     recommended_tags = classy.runPNAClassifier(4,3, sys.argv[1])
     print recommended_tags
 
