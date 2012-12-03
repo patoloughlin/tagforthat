@@ -69,6 +69,9 @@ class PNAClassifier(object):
             questionDistances[tag]['distance'] = (questionDistances[tag]['distance'] * 1.0) / (questionDistances[tag]['count'] * 1.0)
         topTags = sorted(questionDistances, key= lambda X : questionDistances[X]['distance'])[:innerLimit]
         print topTags
+        rvalue = {}
+        rvalue['tags'] = topTags
+        return rvalue
         return topTags
     
 def main():

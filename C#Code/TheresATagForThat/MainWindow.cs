@@ -22,10 +22,8 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnClickButtonClicked (object sender, EventArgs e)
 	{
-		TestObject temp = new TestObject();
-		temp.number = 1;
-		temp.Name = this.entry1.Text;
-		this.label1.Text = sendRequest(JsonConvert.SerializeObject(temp).ToString());
+		string jsonResponse = sendRequest(this.entry1.Text).ToString();
+		this.label1.Text = jsonResponse;
 
 	}
 	private string sendRequest(string request)
@@ -34,7 +32,7 @@ public partial class MainWindow: Gtk.Window
 		{
 			//Set up connection to python server
 			TcpClient client = new TcpClient();
-			IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse(this.IpAddress.Text), this.Port.Text);
+			IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse(this.IpAddress.Text), Int32.Parse(this.Port.Text));
 			client.Connect(serverEndPoint);
 			NetworkStream clientStream = client.GetStream();
 			//Encode request to send to python

@@ -5,12 +5,12 @@ public partial class MainWindow
 {
 	private global::Gtk.Fixed fixed2;
 	private global::Gtk.Button ClickButton;
-	private global::Gtk.Label label1;
 	private global::Gtk.Entry entry1;
 	private global::Gtk.Entry Port;
 	private global::Gtk.Entry IpAddress;
 	private global::Gtk.Label label2;
 	private global::Gtk.Label label3;
+	private global::Gtk.Label label1;
 	
 	protected virtual void Build ()
 	{
@@ -34,23 +34,15 @@ public partial class MainWindow
 		w1.X = 16;
 		w1.Y = 12;
 		// Container child fixed2.Gtk.Fixed+FixedChild
-		this.label1 = new global::Gtk.Label ();
-		this.label1.Name = "label1";
-		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("label1");
-		this.fixed2.Add (this.label1);
-		global::Gtk.Fixed.FixedChild w2 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label1]));
-		w2.X = 89;
-		w2.Y = 16;
-		// Container child fixed2.Gtk.Fixed+FixedChild
 		this.entry1 = new global::Gtk.Entry ();
 		this.entry1.CanFocus = true;
 		this.entry1.Name = "entry1";
 		this.entry1.IsEditable = true;
 		this.entry1.InvisibleChar = '●';
 		this.fixed2.Add (this.entry1);
-		global::Gtk.Fixed.FixedChild w3 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.entry1]));
-		w3.X = 21;
-		w3.Y = 54;
+		global::Gtk.Fixed.FixedChild w2 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.entry1]));
+		w2.X = 21;
+		w2.Y = 54;
 		// Container child fixed2.Gtk.Fixed+FixedChild
 		this.Port = new global::Gtk.Entry ();
 		this.Port.CanFocus = true;
@@ -59,9 +51,9 @@ public partial class MainWindow
 		this.Port.IsEditable = true;
 		this.Port.InvisibleChar = '●';
 		this.fixed2.Add (this.Port);
-		global::Gtk.Fixed.FixedChild w4 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.Port]));
-		w4.X = 520;
-		w4.Y = 341;
+		global::Gtk.Fixed.FixedChild w3 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.Port]));
+		w3.X = 520;
+		w3.Y = 341;
 		// Container child fixed2.Gtk.Fixed+FixedChild
 		this.IpAddress = new global::Gtk.Entry ();
 		this.IpAddress.CanFocus = true;
@@ -70,25 +62,33 @@ public partial class MainWindow
 		this.IpAddress.IsEditable = true;
 		this.IpAddress.InvisibleChar = '●';
 		this.fixed2.Add (this.IpAddress);
-		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.IpAddress]));
-		w5.X = 520;
-		w5.Y = 316;
+		global::Gtk.Fixed.FixedChild w4 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.IpAddress]));
+		w4.X = 520;
+		w4.Y = 316;
 		// Container child fixed2.Gtk.Fixed+FixedChild
 		this.label2 = new global::Gtk.Label ();
 		this.label2.Name = "label2";
 		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Ip Address");
 		this.fixed2.Add (this.label2);
-		global::Gtk.Fixed.FixedChild w6 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label2]));
-		w6.X = 460;
-		w6.Y = 317;
+		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label2]));
+		w5.X = 460;
+		w5.Y = 317;
 		// Container child fixed2.Gtk.Fixed+FixedChild
 		this.label3 = new global::Gtk.Label ();
 		this.label3.Name = "label3";
 		this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("Port #");
 		this.fixed2.Add (this.label3);
-		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label3]));
-		w7.X = 475;
-		w7.Y = 340;
+		global::Gtk.Fixed.FixedChild w6 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label3]));
+		w6.X = 475;
+		w6.Y = 340;
+		// Container child fixed2.Gtk.Fixed+FixedChild
+		this.label1 = new global::Gtk.Label ();
+		this.label1.Name = "label1";
+		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("label1");
+		this.fixed2.Add (this.label1);
+		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.fixed2 [this.label1]));
+		w7.X = 84;
+		w7.Y = 16;
 		this.Add (this.fixed2);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();

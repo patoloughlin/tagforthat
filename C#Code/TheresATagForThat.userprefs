@@ -1,8 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TheresATagForThat\MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TheresATagForThat\Main.cs">
     <Files>
-      <File FileName="TheresATagForThat\MainWindow.cs" Line="35" Column="34" />
+      <File FileName="TheresATagForThat\MainWindow.cs" Line="66" Column="25" />
+      <File FileName="TheresATagForThat\Models\TagsResponse.cs" Line="9" Column="3" />
+      <File FileName="TheresATagForThat\AssemblyInfo.cs" Line="7" Column="12" />
+      <File FileName="TheresATagForThat\Models\TestObject.cs" Line="1" Column="1" />
+      <File FileName="TheresATagForThat\Main.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,5 +1,14 @@
 import socket
 import sys
+import classifier
+import test_corpus
+import index
+
+#Setting up corpus 
+items = test_corpus.corpus
+myIndexer = index.Indexer()
+myIndexer.index(items)
+classy = classifier.PNAClassifier(myIndexer.tagInfo,items)
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,12 +31,12 @@ while True:
         print sys.stderr, 'Recieving "%s" bytes' % size
         connection.sendall('send data')
         data = connection.recv(int(size))
-	print >> sys.stderr, 'Recieved "%s"' % data
+        print >> sys.stderr, 'Recieved "%s"' % data
+        responce = classy.runPNAClassifier(10,5, data)
 	response = 'Server Response'
-	responce = "Thanks"
-	connection.sendall(str(len(response)))
+	connection.sendall(str(len(str(responce))))
 	connection.recv(16)
-	connection.sendall(responce)
+	connection.sendall(str(responce))
             
             
     finally:

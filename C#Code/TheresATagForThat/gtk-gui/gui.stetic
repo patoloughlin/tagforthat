@@ -32,16 +32,6 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Label" id="label1">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">label1</property>
-          </widget>
-          <packing>
-            <property name="X">89</property>
-            <property name="Y">16</property>
-          </packing>
-        </child>
-        <child>
           <widget class="Gtk.Entry" id="entry1">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
@@ -97,6 +87,16 @@
           <packing>
             <property name="X">475</property>
             <property name="Y">340</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Label" id="label1">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">label1</property>
+          </widget>
+          <packing>
+            <property name="X">84</property>
+            <property name="Y">16</property>
           </packing>
         </child>
       </widget>
