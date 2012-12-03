@@ -70,14 +70,12 @@ class PNAClassifier(object):
         topTags = sorted(questionDistances, key= lambda X : questionDistances[X]['distance'])[:innerLimit]
         print topTags
         rvalue = {}
-        rvalue['tags'] = topTags
+        rvalue['tags'] = []
+        for tag in topTags:
+            rvalue['tags'].append(str(tag))
         return rvalue
-        return topTags
     
 def main():
-    centroids = [{'tag':'c#','tokens':{'c#':1.3862943611198906}},{'tag':'java','tokens':{'java':.2}}]
-    classifier = PNAClassifier(centroids)
-    classifier.runPNAClassifier(4,2,"linux is broken")
     return 0
 if __name__=="__main__":
     main()

@@ -3,12 +3,23 @@ import sys
 import classifier
 import test_corpus
 import index
+import utils
+
+from pymongo import DESCENDING
 
 #Setting up corpus 
-items = test_corpus.corpus
-myIndexer = index.Indexer()
-myIndexer.index(items)
-classy = classifier.PNAClassifier(myIndexer.tagInfo,items)
+
+db = utils.connect_db('stack',remove_existing=False)
+myIndexer = index.Indexer(db)
+
+tags_ = myIndexer.centroids.find()
+tags = tags_.sort('tag',DESCENDING)
+finalList = [doc for doc in tags]
+
+q_ = myIndexer.questions.find()
+questions = q_.sort('question_id',DESCENDING)
+finalQuestions = [doc for doc in questions]
+classy = classifier.PNAClassifier(finalList,finalQuestions)
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +43,7 @@ while True:
         connection.sendall('send data')
         data = connection.recv(int(size))
         print >> sys.stderr, 'Recieved "%s"' % data
-        responce = classy.runPNAClassifier(10,5, data)
+        responce = classy.runPNAClassifier(10,10, data)
 	response = 'Server Response'
 	connection.sendall(str(len(str(responce))))
 	connection.recv(16)
