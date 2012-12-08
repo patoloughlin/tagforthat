@@ -13,11 +13,10 @@ import itertools
 
 def tokenize(text):
     tokens = re.findall("[\S']+", text.lower())
-    templist = [porter2.stem(token) for token in tokens]
     retstring = ""
-    for item in templist:
+    for token in tokens:
         retstring += " "
-        retstring += item
+        retstring += porter2.stem(token)
     return retstring
 
 class Indexer(object):
@@ -93,6 +92,7 @@ if __name__=="__main__":
     mydb = utils.connect_db('stack', remove_existing=True)
     indexMe = Indexer(mydb)
     indexMe.index(items)
+    print tokenize("this is a c++ test string. I'm testing c# and it sucks!")
     end_time = time.time()
     print 'done with indexing after %.3f seconds'%(end_time-start_time)
     
