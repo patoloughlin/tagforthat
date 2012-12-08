@@ -11,11 +11,14 @@ from collections import Counter
 import tfidf
 import itertools
 
-"""
 def tokenize(text):
-    tokens = re.findall("[\w']+", text.lower())
-    return [porter2.stem(token) for token in tokens]
-"""
+    tokens = re.findall("[\S']+", text.lower())
+    templist = [porter2.stem(token) for token in tokens]
+    retstring = ""
+    for item in templist:
+        retstring += " "
+        retstring += item
+    return retstring
 
 class Indexer(object):
     def __init__(self, db):
@@ -29,10 +32,12 @@ class Indexer(object):
     def index(self,items):
         
         iterators = itertools.tee(items)
+        tokenizedBody = {}
 
         for question in iterators[0]:
             wordSet = set()
-            self.tfidfOb.add_input_document(question["body"])
+            tokenizedBody[question["question_id"]] = tokenize(question["body"])
+            self.tfidfOb.add_input_document(tokenizedBody[question["question_id"]])
             self.questions.insert(question)
 
 #        for token in tokens:
@@ -48,7 +53,7 @@ class Indexer(object):
         for question in iterators[1]:   # may need to watch out for reused generators!!!
             for tag in question["tags"]:
                 #print "tag: " + str(tag)
-                tfidfDict = self.tfidfOb.get_doc_keywords_dict(question["body"])
+                tfidfDict = self.tfidfOb.get_doc_keywords_dict(tokenizedBody[question["question_id"]])
                 #print tfidfDict
                 for term in tfidfDict:
                     #print "YO: " + str(term)
