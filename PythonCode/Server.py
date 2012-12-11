@@ -43,7 +43,7 @@ while True:
         connection.sendall('send data')
         data = connection.recv(int(size))
         print >> sys.stderr, 'Recieved "%s"' % data
-        responce = classy.runPNAClassifier(10,10, data)
+        responce = classy.runPNAClassifier(15,10, data)
 	response = 'Server Response'
 	connection.sendall(str(len(str(responce))))
 	connection.recv(16)

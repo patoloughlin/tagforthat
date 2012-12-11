@@ -6,6 +6,7 @@ import operator
 import tfidf
 import test_corpus
 import math
+import index
 
 #centroid
 #{tag:'tagName', tokens:{word1:tf-idfValue, word2:tf-idfValue...}}
@@ -35,7 +36,7 @@ class PNAClassifier(object):
         topTags = []
         #Calculate tf-idf vector of query based off of idf vector in database
         queryDict = {}
-        queryDict['tokens'] = self.tfidf.get_doc_keywords_dict(query)
+        queryDict['tokens'] = self.tfidf.get_doc_keywords_dict(index.tokenize(query))
         for centroid in self.centroids:
             #Calculate distance of query to centroid
             #Save distance into tagDistance array
@@ -44,6 +45,7 @@ class PNAClassifier(object):
         print "initial:" + str(topTags)
         #Loop throught the top tags(outerLimit is the cut off for this)
         #We will now get the knn neighbors of all the questions inside of the outerLimit
+        '''
         loadedQuestions = []
         questionDistances = {}
         for tag in topTags:
@@ -69,8 +71,10 @@ class PNAClassifier(object):
             questionDistances[tag]['distance'] = (questionDistances[tag]['distance'] * 1.0) / (questionDistances[tag]['count'] * 1.0)
         topTags = sorted(questionDistances, key= lambda X : questionDistances[X]['distance'])[:innerLimit]
         print topTags
+        '''
         rvalue = {}
         rvalue['tags'] = []
+        
         for tag in topTags:
             rvalue['tags'].append(str(tag))
         return rvalue
