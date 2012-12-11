@@ -1,0 +1,8 @@
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Debug\testGUI.exe
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Debug\testGUI.pdb
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.csprojResolveAssemblyReference.cache
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.Form1.resources
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.Properties.Resources.resources
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.csproj.GenerateResource.Cache
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.exe
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Debug\testGUI.pdb

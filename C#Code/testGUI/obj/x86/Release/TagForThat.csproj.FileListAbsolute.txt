@@ -1,0 +1,10 @@
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Release\testGUI.exe
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Release\testGUI.pdb
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Release\Newtonsoft.Json.dll
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\bin\Release\Newtonsoft.Json.xml
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\testGUI.Form1.resources
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\testGUI.Properties.Resources.resources
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\TagForThat.csproj.GenerateResource.Cache
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\testGUI.exe
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\testGUI.pdb
+C:\Users\Freitas\documents\visual studio 2010\Projects\testGUI\testGUI\obj\x86\Release\TagForThat.csprojResolveAssemblyReference.cache
